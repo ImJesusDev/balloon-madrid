@@ -11,7 +11,6 @@ export default function ContactForm() {
   });
 
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -89,15 +88,6 @@ export default function ContactForm() {
               className="text-red-600 text-center mb-4"
             >
               {error}
-            </motion.p>
-          )}
-          {success && (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-green-600 text-center mb-4"
-            >
-              {success}
             </motion.p>
           )}
 
