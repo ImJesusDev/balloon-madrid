@@ -2,12 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { FaWhatsapp } from "react-icons/fa";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
-    phone: "",
     message: "",
   });
 
@@ -41,16 +40,16 @@ export default function ContactForm() {
     e.preventDefault();
 
     // Simple form validation
-    if (!formData.name || !formData.email || !formData.message) {
+    if (!formData.name || !formData.message) {
       setError("Por favor, completa todos los campos obligatorios.");
       return;
     }
 
-    // TODO: Replace with real API call later
-    console.log("Form submitted:", formData);
-    setSuccess("¡Gracias! Nos pondremos en contacto contigo pronto.");
-    setError("");
-    setFormData({ name: "", email: "", phone: "", message: "" });
+    const whatsappNumber = "34692206268";
+    const whatsappMessage = `${formData.message}. Mi nombre es ${formData.name}. `;
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+    window.open(whatsappURL, "_blank");
   };
 
   return (
@@ -123,47 +122,6 @@ export default function ContactForm() {
             />
           </motion.div>
 
-          {/* Email */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="mb-4"
-          >
-            <label className="block text-gray-700 dark:text-gray-300 font-semibold">
-              Correo Electrónico *
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg"
-              placeholder="	Tu correo electrónico"
-              required
-            />
-          </motion.div>
-
-          {/* Phone */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.7, duration: 0.6 }}
-            className="mb-4"
-          >
-            <label className="block text-gray-700 dark:text-gray-300 font-semibold">
-              Teléfono
-            </label>
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg"
-              placeholder="Tu teléfono (opcional)"
-            />
-          </motion.div>
-
           {/* Message */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -179,7 +137,7 @@ export default function ContactForm() {
               value={formData.message}
               onChange={handleChange}
               className="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg"
-              placeholder="Tu mensaje"
+              placeholder="Ejemplo: Me gustaría un presupuesto para una cumpleaños, la temática es Bluey y Bingo, el 20 de mayo en Madrid."
               rows={5}
               required
             />
@@ -191,9 +149,10 @@ export default function ContactForm() {
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.9, duration: 0.6 }}
             type="submit"
-            className="w-full bg-pink-600 hover:bg-pink-500 dark:bg-pink-500 dark:hover:bg-pink-400 text-white py-3 px-6 rounded-lg"
+            className="w-full bg-pink-600 hover:bg-pink-500 dark:bg-pink-500 dark:hover:bg-pink-400 text-white py-3 px-6 rounded-lg flex items-center justify-center gap-2"
           >
             Enviar Mensaje
+            <FaWhatsapp className="text-2xl hover:text-green-500 transition dark:hover:text-green-400" />
           </motion.button>
         </motion.form>
       </div>
