@@ -35,7 +35,7 @@ export default function RootLayout({
         <Navbar />
         <main className="pt-24">{children}</main>
         <Link
-          className="fixed right-4 bottom-32 group bg-white p-2 rounded-full dark:bg-gray-900 border-2 border-gray-900 hover:border-green-400 dark:border-white dark:hover:border-green-400"
+          className="fixed right-4 bottom-3 group bg-white p-2 rounded-full dark:bg-gray-900 border-2 border-gray-900 hover:border-green-400 dark:border-white dark:hover:border-green-400"
           href="https://wa.me/34692206268"
           target="_blank"
           rel="noopener noreferrer"
